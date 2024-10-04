@@ -1,11 +1,11 @@
-/* Import Google Font - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+/* Import Google Font - Source Sans Pro */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;500;600&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Cairo", sans-serif; 
+  font-family: "Source Sans Pro", sans-serif; 
 }
 .logo, .logo_light {
   width: 420px;
@@ -34,11 +34,12 @@
     text-align: center; 
   }
   
-:root {
+  :root {
     /* Agriculture-themed colors */
     --text-color: #F4F9F4; 
     --subheading-color: #A0CFA0; 
-    --placeholder-color: #B2D8B2; 
+    --placeholder-color: #B2D8B2;
+    --placeholder-color_1: #B2D8B2;
     --primary-color: #1A120B; 
     --secondary-color: #406343; 
     --secondary-hover-color: #306232; 
@@ -47,12 +48,13 @@
 
 .light_mode {
   /* Light mode colors */
-  --text-color: #222;
-  --subheading-color: #A0A0A0;
-  --placeholder-color: #6C6C6C;
-  --primary-color: #FFF;
-  --secondary-color: #E9EEF6;
-  --secondary-hover-color: #DBE1EA;
+  --text-color: #dddcdc;
+  --subheading-color: #30955a;
+  --placeholder-color: #dddcdc;
+  --placeholder-color_1: #000000;
+  --primary-color: #ffffff;
+  --secondary-color: #30955a; 
+  --secondary-hover-color: #30955a; 
 }
 
 body {
@@ -331,9 +333,9 @@ body.hide-header .header {
 
 .typing-area .disclaimer-text {
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.99rem;
   margin-top: 1rem;
-  color: var(--placeholder-color);
+  color: var(--placeholder-color_1);
 }
 
 /* Responsive media query code for small screen */

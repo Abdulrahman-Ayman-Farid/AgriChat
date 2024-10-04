@@ -7,6 +7,7 @@ const deleteChatButton = document.querySelector("#delete-chat-button");
 // State variables
 let userMessage = null;
 let isResponseGenerating = false;
+let messageHistory = []; // مصفوفة لتخزين الرسائل
 
 // API configuration
 const API_KEY = "AIzaSyBQVJNOfm8f3sp_tEEjrbSIW-FC4aibJKM"; // Your API key here
@@ -78,6 +79,13 @@ const showTypingEffect = (text, textElement, incomingMessageDiv) => {
 const generateAPIResponse = async (incomingMessageDiv) => {
   const textElement = incomingMessageDiv.querySelector(".text"); // Getting text element
 
+  // بروميت مخصص للزراعة مع الرسائل السابقة
+  const farmingPrompt = "You are AgriChat, an advanced agricultural assistant. Provide detailed insights, tips, and recommendations related to agriculture, sustainable farming practices, crop management, pest control, soil health, and innovative farming technologies. Respond in a friendly and informative manner.";
+  
+  // دمج الرسائل السابقة مع الرسالة الحالية
+  const history = messageHistory.map(msg => `User: ${msg}`).join("\n");
+  const userPrompt = `${farmingPrompt}\nPrevious Messages:\n${history}\nUser Question: ${userMessage}`;
+
   try {
     // Send a POST request to the API with the user's message
     const response = await fetch(API_URL, {
@@ -86,7 +94,7 @@ const generateAPIResponse = async (incomingMessageDiv) => {
       body: JSON.stringify({ 
         contents: [{ 
           role: "user", 
-          parts: [{ text: userMessage }] 
+          parts: [{ text: userPrompt }] 
         }] 
       }),
     });
@@ -97,6 +105,10 @@ const generateAPIResponse = async (incomingMessageDiv) => {
     // Get the API response text and remove asterisks from it
     const apiResponse = data?.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, '$1');
     showTypingEffect(apiResponse, textElement, incomingMessageDiv); // Show typing effect
+
+    // تحديث سجل الرسائل بعد الحصول على الرد
+    messageHistory.push(userMessage); // إضافة الرسالة الحالية
+    messageHistory.push(apiResponse); // إضافة رد API
   } catch (error) { // Handle error
     isResponseGenerating = false;
     textElement.innerText = error.message;
@@ -171,6 +183,7 @@ toggleThemeButton.addEventListener("click", () => {
 deleteChatButton.addEventListener("click", () => {
   if (confirm("Are you sure you want to delete all the chats?")) {
     localStorage.removeItem("saved-chats");
+    messageHistory = []; // Reset message history
     loadDataFromLocalstorage();
   }
 });
@@ -191,4 +204,3 @@ typingForm.addEventListener("submit", (e) => {
 
 // Load data from local storage on page load
 loadDataFromLocalstorage();
-    
