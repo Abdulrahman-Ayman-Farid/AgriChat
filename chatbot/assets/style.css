@@ -48,7 +48,7 @@
 
 .light_mode {
   /* Light mode colors */
-  --text-color: #dddcdc;
+  --text-color: #000000;
   --subheading-color: #30955a;
   --placeholder-color: #dddcdc;
   --placeholder-color_1: #000000;
