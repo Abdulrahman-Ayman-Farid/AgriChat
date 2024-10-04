@@ -8,18 +8,30 @@
   font-family: "Cairo", sans-serif; 
 }
 .logo, .logo_light {
-    width: 420px; 
-    height: auto; /* يحافظ على نسبة العرض إلى الارتفاع */
-    display: none; /* اجعلها مخفية بشكل افتراضي */
+  width: 420px;
+  height: auto; 
+  display: none; 
 }
 
-/* إعداد محاذاة العناصر في الصفحة */
+@media (max-width: 768px) { 
+  .logo, .logo_light {
+      width: 350px; 
+      display: block; 
+  }
+}
+
+@media (max-width: 480px) { 
+  .logo, .logo_light {
+      width: 250px; 
+  }
+}
+
 .header {
     display: flex;
     flex-direction: column;
-    align-items: center; /* محاذاة العناصر في المنتصف عموديًا */
-    justify-content: center; /* محاذاة العناصر في المنتصف أفقيًا */
-    text-align: center; /* محاذاة النص في المنتصف */
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
   }
   
 :root {
