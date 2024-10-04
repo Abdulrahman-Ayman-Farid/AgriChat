@@ -79,9 +79,11 @@ const showTypingEffect = (text, textElement, incomingMessageDiv) => {
 const generateAPIResponse = async (incomingMessageDiv) => {
   const textElement = incomingMessageDiv.querySelector(".text"); // Getting text element
 
-  // بروميت مخصص للزراعة مع الرسائل السابقة
-  const farmingPrompt = "You are AgriChat, an advanced agricultural assistant. Provide detailed insights, tips, and recommendations related to agriculture, sustainable farming practices, crop management, pest control, soil health, and innovative farming technologies. Respond in a friendly and informative manner.";
-  
+  // بروميت مخصص للتنبؤات الزراعية المتعلقة بالجفاف والفيضانات ورطوبة التربة
+  const farmingPrompt = "You are AgriChat, an advanced agricultural assistant. Your expertise lies in analyzing extensive climate data to provide accurate predictions and recommendations regarding climate impacts on agriculture, specifically concerning droughts, floods, and soil moisture levels. You should respond as if you're thoughtfully considering the data, offering deep insights and logical conclusions. Always provide detailed analysis and precise predictions, reflecting a careful assessment of the risks involved. Respond in both Arabic and English in a friendly, informative manner.";
+
+    
+    
   // دمج الرسائل السابقة مع الرسالة الحالية
   const history = messageHistory.map(msg => `User: ${msg}`).join("\n");
   const userPrompt = `${farmingPrompt}\nPrevious Messages:\n${history}\nUser Question: ${userMessage}`;
@@ -117,6 +119,7 @@ const generateAPIResponse = async (incomingMessageDiv) => {
     incomingMessageDiv.classList.remove("loading");
   }
 }
+
 
 // Show a loading animation while waiting for the API response
 const showLoadingAnimation = () => {
